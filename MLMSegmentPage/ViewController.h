@@ -2,7 +2,7 @@
 //  ViewController.h
 //  MLMSegmentPage
 //
-//  Created by my on 2016/11/14.
+//  Created by my on 2016/11/11.
 //  Copyright © 2016年 my. All rights reserved.
 //
 
@@ -10,6 +10,5 @@
 
 @interface ViewController : UIViewController
 
-
+@property (nonatomic, assign) NSInteger index;
 @end
-

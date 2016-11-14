@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F00ACB71DD9A96A00DDF59E /* MLMSegmentHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F00ACB11DD9A96A00DDF59E /* MLMSegmentHead.m */; };
+		0F00ACB81DD9A96A00DDF59E /* MLMSegmentPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F00ACB31DD9A96A00DDF59E /* MLMSegmentPage.m */; };
+		0F00ACBC1DD9AA6A00DDF59E /* UIView+ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F00ACBB1DD9AA6A00DDF59E /* UIView+ViewController.m */; };
 		0F3059631DD9A68600F4BC16 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3059621DD9A68600F4BC16 /* main.m */; };
-		0F3059661DD9A68600F4BC16 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3059651DD9A68600F4BC16 /* AppDelegate.m */; };
-		0F3059691DD9A68600F4BC16 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3059681DD9A68600F4BC16 /* ViewController.m */; };
-		0F30596C1DD9A68600F4BC16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F30596A1DD9A68600F4BC16 /* Main.storyboard */; };
 		0F30596E1DD9A68600F4BC16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F30596D1DD9A68600F4BC16 /* Assets.xcassets */; };
 		0F3059711DD9A68600F4BC16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F30596F1DD9A68600F4BC16 /* LaunchScreen.storyboard */; };
 		0F30597C1DD9A68600F4BC16 /* MLMSegmentPageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F30597B1DD9A68600F4BC16 /* MLMSegmentPageTests.m */; };
 		0F3059871DD9A68600F4BC16 /* MLMSegmentPageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3059861DD9A68600F4BC16 /* MLMSegmentPageUITests.m */; };
+		0F30599E1DD9A6B000F4BC16 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3059951DD9A6B000F4BC16 /* AppDelegate.m */; };
+		0F30599F1DD9A6B000F4BC16 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3059971DD9A6B000F4BC16 /* MainTableViewController.m */; };
+		0F3059A01DD9A6B000F4BC16 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3059991DD9A6B000F4BC16 /* MainViewController.m */; };
+		0F3059A11DD9A6B000F4BC16 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F30599B1DD9A6B000F4BC16 /* ViewController.m */; };
+		0F3059A21DD9A6B000F4BC16 /* View.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F30599D1DD9A6B000F4BC16 /* View.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,13 +40,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F00ACB01DD9A96A00DDF59E /* MLMSegmentHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMSegmentHead.h; sourceTree = "<group>"; };
+		0F00ACB11DD9A96A00DDF59E /* MLMSegmentHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMSegmentHead.m; sourceTree = "<group>"; };
+		0F00ACB21DD9A96A00DDF59E /* MLMSegmentPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMSegmentPage.h; sourceTree = "<group>"; };
+		0F00ACB31DD9A96A00DDF59E /* MLMSegmentPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMSegmentPage.m; sourceTree = "<group>"; };
+		0F00ACB41DD9A96A00DDF59E /* SegmentPageHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentPageHead.h; sourceTree = "<group>"; };
+		0F00ACBA1DD9AA6A00DDF59E /* UIView+ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ViewController.h"; sourceTree = "<group>"; };
+		0F00ACBB1DD9AA6A00DDF59E /* UIView+ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ViewController.m"; sourceTree = "<group>"; };
 		0F30595E1DD9A68600F4BC16 /* MLMSegmentPage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLMSegmentPage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F3059621DD9A68600F4BC16 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0F3059641DD9A68600F4BC16 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		0F3059651DD9A68600F4BC16 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0F3059671DD9A68600F4BC16 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0F3059681DD9A68600F4BC16 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		0F30596B1DD9A68600F4BC16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F30596D1DD9A68600F4BC16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F3059701DD9A68600F4BC16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F3059721DD9A68600F4BC16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +58,16 @@
 		0F3059821DD9A68600F4BC16 /* MLMSegmentPageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLMSegmentPageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F3059861DD9A68600F4BC16 /* MLMSegmentPageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLMSegmentPageUITests.m; sourceTree = "<group>"; };
 		0F3059881DD9A68600F4BC16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F3059941DD9A6B000F4BC16 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0F3059951DD9A6B000F4BC16 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0F3059961DD9A6B000F4BC16 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		0F3059971DD9A6B000F4BC16 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
+		0F3059981DD9A6B000F4BC16 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		0F3059991DD9A6B000F4BC16 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		0F30599A1DD9A6B000F4BC16 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0F30599B1DD9A6B000F4BC16 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0F30599C1DD9A6B000F4BC16 /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
+		0F30599D1DD9A6B000F4BC16 /* View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +95,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F00ACAF1DD9A96A00DDF59E /* MLMSegmentPage */ = {
+			isa = PBXGroup;
+			children = (
+				0F00ACB41DD9A96A00DDF59E /* SegmentPageHead.h */,
+				0F00ACB01DD9A96A00DDF59E /* MLMSegmentHead.h */,
+				0F00ACB11DD9A96A00DDF59E /* MLMSegmentHead.m */,
+				0F00ACB21DD9A96A00DDF59E /* MLMSegmentPage.h */,
+				0F00ACB31DD9A96A00DDF59E /* MLMSegmentPage.m */,
+				0F00ACBA1DD9AA6A00DDF59E /* UIView+ViewController.h */,
+				0F00ACBB1DD9AA6A00DDF59E /* UIView+ViewController.m */,
+			);
+			path = MLMSegmentPage;
+			sourceTree = "<group>";
+		};
 		0F3059551DD9A68500F4BC16 = {
 			isa = PBXGroup;
 			children = (
@@ -101,11 +132,17 @@
 		0F3059601DD9A68600F4BC16 /* MLMSegmentPage */ = {
 			isa = PBXGroup;
 			children = (
-				0F3059641DD9A68600F4BC16 /* AppDelegate.h */,
-				0F3059651DD9A68600F4BC16 /* AppDelegate.m */,
-				0F3059671DD9A68600F4BC16 /* ViewController.h */,
-				0F3059681DD9A68600F4BC16 /* ViewController.m */,
-				0F30596A1DD9A68600F4BC16 /* Main.storyboard */,
+				0F3059941DD9A6B000F4BC16 /* AppDelegate.h */,
+				0F3059951DD9A6B000F4BC16 /* AppDelegate.m */,
+				0F3059961DD9A6B000F4BC16 /* MainTableViewController.h */,
+				0F3059971DD9A6B000F4BC16 /* MainTableViewController.m */,
+				0F3059981DD9A6B000F4BC16 /* MainViewController.h */,
+				0F3059991DD9A6B000F4BC16 /* MainViewController.m */,
+				0F30599A1DD9A6B000F4BC16 /* ViewController.h */,
+				0F30599B1DD9A6B000F4BC16 /* ViewController.m */,
+				0F30599C1DD9A6B000F4BC16 /* View.h */,
+				0F30599D1DD9A6B000F4BC16 /* View.m */,
+				0F00ACAF1DD9A96A00DDF59E /* MLMSegmentPage */,
 				0F30596D1DD9A68600F4BC16 /* Assets.xcassets */,
 				0F30596F1DD9A68600F4BC16 /* LaunchScreen.storyboard */,
 				0F3059721DD9A68600F4BC16 /* Info.plist */,
@@ -207,6 +244,7 @@
 				TargetAttributes = {
 					0F30595D1DD9A68600F4BC16 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 5MEUQ98276;
 						ProvisioningStyle = Automatic;
 					};
 					0F3059761DD9A68600F4BC16 = {
@@ -248,7 +286,6 @@
 			files = (
 				0F3059711DD9A68600F4BC16 /* LaunchScreen.storyboard in Resources */,
 				0F30596E1DD9A68600F4BC16 /* Assets.xcassets in Resources */,
-				0F30596C1DD9A68600F4BC16 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,9 +310,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F3059691DD9A68600F4BC16 /* ViewController.m in Sources */,
-				0F3059661DD9A68600F4BC16 /* AppDelegate.m in Sources */,
+				0F30599E1DD9A6B000F4BC16 /* AppDelegate.m in Sources */,
+				0F00ACB81DD9A96A00DDF59E /* MLMSegmentPage.m in Sources */,
 				0F3059631DD9A68600F4BC16 /* main.m in Sources */,
+				0F3059A21DD9A6B000F4BC16 /* View.m in Sources */,
+				0F30599F1DD9A6B000F4BC16 /* MainTableViewController.m in Sources */,
+				0F00ACB71DD9A96A00DDF59E /* MLMSegmentHead.m in Sources */,
+				0F00ACBC1DD9AA6A00DDF59E /* UIView+ViewController.m in Sources */,
+				0F3059A01DD9A6B000F4BC16 /* MainViewController.m in Sources */,
+				0F3059A11DD9A6B000F4BC16 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,14 +354,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0F30596A1DD9A68600F4BC16 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0F30596B1DD9A68600F4BC16 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0F30596F1DD9A68600F4BC16 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -370,7 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -412,7 +447,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -424,7 +459,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5MEUQ98276;
 				INFOPLIST_FILE = MLMSegmentPage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mlm.MLMSegmentPage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -435,7 +472,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5MEUQ98276;
 				INFOPLIST_FILE = MLMSegmentPage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mlm.MLMSegmentPage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -507,6 +546,7 @@
 				0F30598D1DD9A68600F4BC16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F30598E1DD9A68600F4BC16 /* Build configuration list for PBXNativeTarget "MLMSegmentPageTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +555,7 @@
 				0F3059901DD9A68600F4BC16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F3059911DD9A68600F4BC16 /* Build configuration list for PBXNativeTarget "MLMSegmentPageUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +564,7 @@
 				0F3059931DD9A68600F4BC16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

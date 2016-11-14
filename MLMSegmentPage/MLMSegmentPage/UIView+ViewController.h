@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  UIView+ViewController.h
 //  MLMSegmentPage
 //
 //  Created by my on 16/11/4.
@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface UIView (ViewController)
 
-@property (strong, nonatomic) UIWindow *window;
-
+- (UIViewController *)viewController;
 
 @end
-
