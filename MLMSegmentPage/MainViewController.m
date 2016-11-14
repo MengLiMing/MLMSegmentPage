@@ -51,7 +51,7 @@
             _pageView.fontScale = 1.2;
             _pageView.fontSize = 12;
             
-            _pageView.showIndex = 3;
+            _pageView.showIndex = 4;
             
             
             _pageView.deselectColor = [UIColor grayColor];

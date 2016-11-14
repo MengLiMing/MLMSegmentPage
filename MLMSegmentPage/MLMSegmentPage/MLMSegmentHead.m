@@ -91,6 +91,8 @@ static CGFloat animation_time = .3;
     _maxTitles = _maxTitles>titlesArray.count?titlesArray.count:_maxTitles;
     buttonWidth = SCROLL_WIDTH/_maxTitles;
     
+    currentIndex = _showIndex;
+    
     [self createView];
 }
 
