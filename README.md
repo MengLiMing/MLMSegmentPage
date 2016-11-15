@@ -26,15 +26,17 @@ manage your controllers or views
 
 * 基础设置
 ```objc
-      MLMSegmentPage *pageView = [[MLMSegmentPage alloc] initSegmentWithFrame:rect titlesArray:titles vcOrviews:vcsOrviews];
+MLMSegmentPage *pageView = [[MLMSegmentPage alloc] initSegmentWithFrame:rect titlesArray:titles vcOrviews:vcsOrviews];
       
-      [self.view addSubview:_pageView];
+[self.view addSubview:_pageView];
 ```
 
-        
 * 其他设置
 
-      设置代理：pageView.delegate = self;
+- 代理：
+```objc
+pageView.delegate = self;
+```
       通过代理方法可以获取当前视图的下标：
        - (void)selectedIndex:(NSInteger)index
       
