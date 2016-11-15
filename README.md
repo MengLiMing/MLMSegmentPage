@@ -49,10 +49,47 @@ pageView.headStyle = 0 - 3；
 //初始化 - 显示的页面
 pageView.showIndex = *;
 
+//设置一个屏幕显示的最大页面数目
+pageView.maxTitleNum = 4;
+
 ```
 
+### 不同风格的参考设置
+* SegmentHeadStyleDefault
+```objc
+pageView.fontScale = 1.2;
+pageView.fontSize = 12;
+pageView.deselectColor = [UIColor grayColor];
+pageView.selectColor = [UIColor blackColor];    
+```
 
-      
+* SegmentHeadStyleLine
+```objc
+//下滑线的设置
+pageView.lineScale = .9;
+pageView.lineHeight = 2;
+
+pageView.fontScale = .85;
+pageView.fontSize = 14;
+pageView.deselectColor = [UIColor grayColor];
+pageView.selectColor = [UIColor blackColor];
+```
+
+* SegmentHeadStyleArrow
+```objc
+pageView.arrowColor = [UIColor blackColor];
+```
+
+* SegmentHeadStyleSlide
+```objc
+pageView.slideHeight = rect.size.height * 0.8;
+//pageView.slideCorner = 0;
+pageView.slideScale = .95;
+          
+pageView.fontSize = 12;            
+pageView.selectColor = [UIColor whiteColor];
+pageView.deselectColor = [UIColor blackColor];
+```
       
       
       
