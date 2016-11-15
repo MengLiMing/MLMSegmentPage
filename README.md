@@ -32,4 +32,13 @@ manage your controllers or views
         
 * 其他设置
 
+      设置代理：pageView.delegate = self;
+      通过代理方法可以获取当前视图的下标：
+      - (void)selectedIndex:(NSInteger)index
+      
+      设置风格：pageView.headStyle = 0 - 3；
+      
+      如果你想在初始页面时，显示在其他页面可以设置 pageView.showIndex = *;
+      
+      
       
