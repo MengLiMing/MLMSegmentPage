@@ -32,19 +32,25 @@ MLMSegmentPage *pageView = [[MLMSegmentPage alloc] initSegmentWithFrame:rect tit
 ```
 
 * 其他设置
-
-  
 ```objc
-//代理：
+//代理
 pageView.delegate = self;
-//通过代理方法可以获取当前视图的下标：
+//通过代理方法可以获取当前视图的下标
 - (void)selectedIndex:(NSInteger)index
+
+//设置风格
+pageView.headStyle = 0 - 3；
+
+//初始化 - 显示的页面
+pageView.showIndex = *;
+
 ```
 
+#### 滑动中加载页面
+* 默认设置为第一次进入只加载当前显示的页面，即 pageView.loadAll = NO;
+* 默认滑动过程中最大缓存页面是所有页面，即 pageView.countLimit = vcsOrviews.count;
       
-      设置风格：pageView.headStyle = 0 - 3；
       
-      如果你想在初始页面时，显示在其他页面可以设置 pageView.showIndex = *;
       
       
       
