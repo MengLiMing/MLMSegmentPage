@@ -12,10 +12,10 @@ manage your controllers or views
 
 ## 预览
 
-![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/default.gif)
-![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/line.gif)
-![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/arrow.gif)
-![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/slide.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/default.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/line.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/arrow.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/slide.gif)
 
 ## 安装
 
