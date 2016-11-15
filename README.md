@@ -33,7 +33,7 @@ MLMSegmentPage *pageView = [[MLMSegmentPage alloc] initSegmentWithFrame:rect tit
 
 * 其他设置
 
-- 代理：
+  - 代理：
 ```objc
 pageView.delegate = self;
 ```
