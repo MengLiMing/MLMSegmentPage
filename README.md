@@ -91,6 +91,7 @@ pageView.selectColor = [UIColor whiteColor];
 pageView.deselectColor = [UIColor blackColor];
 ```
       
-      
+## 反馈
+* 如果您在使用过程中发现任何bug或者有好的改动建议，希望您可以issue我或者发邮件到920459250@qq.com反馈给我 
       
       
