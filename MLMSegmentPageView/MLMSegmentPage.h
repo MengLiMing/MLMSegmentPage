@@ -42,7 +42,7 @@
 @property (nonatomic, strong) UIColor *deselectColor;
 ///字体大小，默认 - 13
 @property (nonatomic, assign) CGFloat fontSize;
-///缩放比例,非滑块模式下,选中标题字体缩放比例，默认 - 1
+///缩放比例,非滑块模式下,选中标题字体缩放比例,不适用于滑块风格，默认 - 1
 @property (nonatomic, assign) CGFloat fontScale;
 ///默认显示开始的位置，默认 - 1
 @property (nonatomic, assign) NSInteger showIndex;

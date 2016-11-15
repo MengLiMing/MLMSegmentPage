@@ -90,6 +90,7 @@
             _pageView.headHeight = 50;
             _pageView.slideHeight = 50 * 0.8;
 //            _pageView.slideCorner = 0;
+            
             _pageView.fontSize = 12;
             _pageView.slideScale = .95;
             
@@ -100,8 +101,6 @@
         default:
             break;
     }
-    
-
     
     [self.view addSubview:_pageView];
     

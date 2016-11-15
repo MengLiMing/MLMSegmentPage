@@ -10,6 +10,7 @@
 #define SegmentPageHead_h
 
 #import "MLMSegmentHead.h"
+#import "MLMSegmentPage.h"
 #import "UIView+ViewController.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
