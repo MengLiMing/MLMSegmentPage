@@ -34,7 +34,7 @@ manage your controllers or views
 
       设置代理：pageView.delegate = self;
       通过代理方法可以获取当前视图的下标：
-      - (void)selectedIndex:(NSInteger)index
+       - (void)selectedIndex:(NSInteger)index
       
       设置风格：pageView.headStyle = 0 - 3；
       
