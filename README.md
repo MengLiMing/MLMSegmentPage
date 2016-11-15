@@ -17,7 +17,18 @@ manage your controllers or views
 ![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/arrow.gif)
 ![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/slide.gif)
 
+## 安装
+
+将 MLMSegmentPageView 拖入Xcode工程中
+
 ## 使用
+将 MLMSegmentPage.h 加入工程中，执行代码
 
-将文件工程中的
+* 基础设置
 
+      MLMSegmentPage *pageView = [[MLMSegmentPage alloc] initSegmentWithFrame:rect titlesArray:titles vcOrviews:vcsOrviews];
+      [self.view addSubview:_pageView];
+        
+* 其他设置
+
+    是
