@@ -25,10 +25,12 @@ manage your controllers or views
 将 MLMSegmentPage.h 加入工程中，执行代码
 
 * 基础设置
-
+```objc
       MLMSegmentPage *pageView = [[MLMSegmentPage alloc] initSegmentWithFrame:rect titlesArray:titles vcOrviews:vcsOrviews];
       
       [self.view addSubview:_pageView];
+```
+
         
 * 其他设置
 
