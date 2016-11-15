@@ -31,7 +31,12 @@ MLMSegmentPage *pageView = [[MLMSegmentPage alloc] initSegmentWithFrame:rect tit
 [self.view addSubview:_pageView];
 ```
 
-* 其他设置
+#### 滑动中加载页面
+* 默认设置为第一次进入只加载当前显示的页面，即 pageView.loadAll = NO;
+* 默认滑动过程中最大缓存页面是所有页面，即 pageView.countLimit = vcsOrviews.count;
+
+
+### 其他设置
 ```objc
 //代理
 pageView.delegate = self;
@@ -46,9 +51,7 @@ pageView.showIndex = *;
 
 ```
 
-#### 滑动中加载页面
-* 默认设置为第一次进入只加载当前显示的页面，即 pageView.loadAll = NO;
-* 默认滑动过程中最大缓存页面是所有页面，即 pageView.countLimit = vcsOrviews.count;
+
       
       
       
