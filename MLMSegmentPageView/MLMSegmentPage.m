@@ -118,9 +118,10 @@
     _headView.deSelectColor = _deselectColor;
     _headView.fontSize = _fontSize;
     _headView.fontScale = _fontScale;
-    _headView.showIndex = MIN(titlesArray.count-1, MAX(0, _showIndex));
+    _showIndex = MIN(titlesArray.count-1, MAX(0, _showIndex));
+    _headView.showIndex = _showIndex;
     
-    currentIndex = _headView.showIndex;
+    currentIndex = _showIndex;
     
     _headView.lineColor = _lineColor;
     _headView.lineHeight = _lineHeight;
