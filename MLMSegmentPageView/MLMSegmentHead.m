@@ -165,7 +165,6 @@ static CGFloat animation_time = .3;
 #pragma mark - drow arrow
 - (void)drawLayer:(CAShapeLayer *)layer {
     CGMutablePathRef path = CGPathCreateMutable();
-    
     CGPathMoveToPoint(path, nil, (buttonWidth - arrow_W)/2, arrow_H);
     CGPathAddLineToPoint(path, nil, buttonWidth/2, 0);
     CGPathAddLineToPoint(path, nil, (buttonWidth + arrow_W)/2, arrow_H);
@@ -217,6 +216,11 @@ static CGFloat animation_time = .3;
     
     return scroll;
 }
+
+
+
+
+
 
 
 #pragma mark - create Line
@@ -384,7 +388,8 @@ static CGFloat animation_time = .3;
         case SegmentHeadStyleSlide:
         {
             slideView.center = CGPointMake(point_x+buttonWidth/2, slideView.center.y);
-            slideScroll.contentOffset = CGPointMake(point_x, 0);
+            CGRect convertRect = [slideView convertRect:titlesScroll.frame fromView:titlesScroll];
+            slideScroll.frame = CGRectMake(convertRect.origin.x, convertRect.origin.y, slideScroll.contentSize.width, slideScroll.contentSize.height);
         }
             break;
         default:
