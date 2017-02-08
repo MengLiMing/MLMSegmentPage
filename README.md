@@ -12,6 +12,46 @@ manage your controllers or views
  * 设置初次进入显示的页面，
  * 设置初次进入加载的页面数目，和滑动过程中页面中保留的页面数目
 
+## 样式
+
+```objc
+//风格
+typedef enum : NSUInteger {
+    /**
+     *  默认
+     */
+    SegmentHeadStyleDefault,
+    /**
+     *  line(下划线)
+     */
+    SegmentHeadStyleLine,
+    /**
+     *  arrow(箭头)
+     */
+    SegmentHeadStyleArrow,
+    /**
+     *  Slide(滑块)
+     */
+    SegmentHeadStyleSlide
+} MLMSegmentHeadStyle;
+//布局样式
+typedef enum : NSUInteger {
+    /*
+     * 默认均分,根据maxTitles计算宽度，均分
+     */
+    MLMSegmentLayoutDefault,
+    
+    /*
+     * 居中(标题不足一屏时选择样式，反之设置后按照居左)
+     */
+    MLMSegmentLayoutCenter,
+    /*
+     * 居左
+     */
+    MLMSegmentLayoutLeft
+    
+} MLMSegmentLayoutStyle;
+```
 ## 部分样式预览
 
 ![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/Center_Line.gif)
