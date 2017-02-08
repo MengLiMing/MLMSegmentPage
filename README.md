@@ -3,6 +3,7 @@ manage your controllers or views
 
 * 快速集成顶部菜单栏
 * 拆分为MLMSegementHead和MLMSegmenScroll，分别设置，使用更灵活
+* 使用NSCache统计页面加载
 
 ## 效果
  * 单独创建自己的ViewController,低耦合，具体操作在自己的ViewController中实现
@@ -32,70 +33,27 @@ manage your controllers or views
 
 * 基础设置
 ```objc
-MLMSegmentPage *pageView = [[MLMSegmentPage alloc] initSegmentWithFrame:rect titlesArray:titles vcOrviews:vcsOrviews];
-      
-[self.view addSubview:_pageView];
+    MLMSegmentHead *segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    
+    MLMSegmentScroll *segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    
+    [MLMSegmentManager associateHead:segHead withScroll:segScroll completion:^{
+        [self.view addSubview:segHead];
+        [self.view addSubview:segScroll];
+    }];
 ```
 
 #### 滑动中加载页面
-* 默认设置为第一次进入只加载当前显示的页面，即 pageView.loadAll = NO;
-* 默认滑动过程中最大缓存页面是所有页面，即 pageView.countLimit = vcsOrviews.count;
-
+* 默认设置为第一次进入只加载当前显示的页面，即 segScroll.loadAll = NO;
+* 默认滑动过程中最大缓存页面是所有页面，即 segScroll.countLimit = vcsOrviews.count;即segScroll.loadAll = 
 
 ### 其他设置
-```objc
-//代理
-pageView.delegate = self;
-//通过代理方法可以获取当前视图的下标
-- (void)selectedIndex:(NSInteger)index
+* 具体设置，参照代码
+* 注意，创建MLMSegmentHead和MLMSegmentScroll，并使用MLMSegmentManager绑定两个View，在block中设置addSubView:操作
 
-//设置风格
-pageView.headStyle = 0 - 3；
-
-//初始化 - 显示的页面
-pageView.showIndex = *;
-
-//设置一个屏幕显示的最大页面数目
-pageView.maxTitleNum = 4;
-
-```
-
-### 不同风格的参考设置
-* SegmentHeadStyleDefault
-```objc
-pageView.fontScale = 1.2;
-pageView.fontSize = 12;
-pageView.deselectColor = [UIColor grayColor];
-pageView.selectColor = [UIColor blackColor];    
-```
-
-* SegmentHeadStyleLine
-```objc
-//下滑线的设置
-pageView.lineScale = .9;
-pageView.lineHeight = 2;
-
-pageView.fontScale = .85;
-pageView.fontSize = 14;
-pageView.deselectColor = [UIColor grayColor];
-pageView.selectColor = [UIColor blackColor];
-```
-
-* SegmentHeadStyleArrow
-```objc
-pageView.arrowColor = [UIColor blackColor];
-```
-
-* SegmentHeadStyleSlide
-```objc
-pageView.slideHeight = rect.size.height * 0.8;
-//pageView.slideCorner = 0;
-pageView.slideScale = .95;
-          
-pageView.fontSize = 12;            
-pageView.selectColor = [UIColor whiteColor];
-pageView.deselectColor = [UIColor blackColor];
-```
+### 未来将添加
+* 添加自定义button的类，用于更复杂的头部菜单
+* 添加moreButton，用于添加，删除头部菜单的数据源
       
 ## 反馈
 * 如果您在使用过程中发现任何bug或者有好的改动建议，希望您可以issue我或者发邮件到920459250@qq.com反馈给我 
