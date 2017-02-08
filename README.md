@@ -29,7 +29,7 @@ manage your controllers or views
 将 MLMSegmentPageView 拖入Xcode工程中
 
 ## 使用
-将 MLMSegmentPage.h 加入工程中，执行代码
+将 MLMSegmentManager.h 加入工程中，执行代码
 
 * 基础设置
 ```objc
