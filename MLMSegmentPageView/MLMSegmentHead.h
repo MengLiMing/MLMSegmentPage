@@ -35,7 +35,7 @@ typedef enum : NSUInteger {
  */
 typedef enum : NSUInteger {
     /*
-     * 默认均分
+     * 默认均分，根据maxTitles计算宽度，均分
      */
     MLMSegmentLayoutDefault,
     
