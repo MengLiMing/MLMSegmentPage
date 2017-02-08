@@ -18,8 +18,10 @@
 		0F3059A11DD9A6B000F4BC16 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F30599B1DD9A6B000F4BC16 /* ViewController.m */; };
 		0F3059A21DD9A6B000F4BC16 /* View.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F30599D1DD9A6B000F4BC16 /* View.m */; };
 		0F488B6F1DDA9D8700A68EF3 /* MLMSegmentHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F488B691DDA9D8700A68EF3 /* MLMSegmentHead.m */; };
-		0F488B701DDA9D8700A68EF3 /* MLMSegmentPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F488B6B1DDA9D8700A68EF3 /* MLMSegmentPage.m */; };
 		0F488B711DDA9D8700A68EF3 /* UIView+ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F488B6E1DDA9D8700A68EF3 /* UIView+ViewController.m */; };
+		0F4B09FC1E4AF408005A4D12 /* UIView+EasyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B09F91E4AF408005A4D12 /* UIView+EasyFrame.m */; };
+		0F4B0A021E4AF431005A4D12 /* MLMSegmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B09FF1E4AF431005A4D12 /* MLMSegmentManager.m */; };
+		0F4B0A031E4AF431005A4D12 /* MLMSegmentScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B0A011E4AF431005A4D12 /* MLMSegmentScroll.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,11 +65,15 @@
 		0F30599D1DD9A6B000F4BC16 /* View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View.m; sourceTree = "<group>"; };
 		0F488B681DDA9D8600A68EF3 /* MLMSegmentHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMSegmentHead.h; sourceTree = "<group>"; };
 		0F488B691DDA9D8700A68EF3 /* MLMSegmentHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMSegmentHead.m; sourceTree = "<group>"; };
-		0F488B6A1DDA9D8700A68EF3 /* MLMSegmentPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMSegmentPage.h; sourceTree = "<group>"; };
-		0F488B6B1DDA9D8700A68EF3 /* MLMSegmentPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMSegmentPage.m; sourceTree = "<group>"; };
 		0F488B6C1DDA9D8700A68EF3 /* SegmentPageHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentPageHead.h; sourceTree = "<group>"; };
 		0F488B6D1DDA9D8700A68EF3 /* UIView+ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ViewController.h"; sourceTree = "<group>"; };
 		0F488B6E1DDA9D8700A68EF3 /* UIView+ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ViewController.m"; sourceTree = "<group>"; };
+		0F4B09F81E4AF408005A4D12 /* UIView+EasyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EasyFrame.h"; sourceTree = "<group>"; };
+		0F4B09F91E4AF408005A4D12 /* UIView+EasyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EasyFrame.m"; sourceTree = "<group>"; };
+		0F4B09FE1E4AF431005A4D12 /* MLMSegmentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMSegmentManager.h; sourceTree = "<group>"; };
+		0F4B09FF1E4AF431005A4D12 /* MLMSegmentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMSegmentManager.m; sourceTree = "<group>"; };
+		0F4B0A001E4AF431005A4D12 /* MLMSegmentScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLMSegmentScroll.h; sourceTree = "<group>"; };
+		0F4B0A011E4AF431005A4D12 /* MLMSegmentScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLMSegmentScroll.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,13 +172,17 @@
 		0F488B671DDA9D8600A68EF3 /* MLMSegmentPageView */ = {
 			isa = PBXGroup;
 			children = (
-				0F488B681DDA9D8600A68EF3 /* MLMSegmentHead.h */,
-				0F488B691DDA9D8700A68EF3 /* MLMSegmentHead.m */,
-				0F488B6A1DDA9D8700A68EF3 /* MLMSegmentPage.h */,
-				0F488B6B1DDA9D8700A68EF3 /* MLMSegmentPage.m */,
 				0F488B6C1DDA9D8700A68EF3 /* SegmentPageHead.h */,
+				0F4B09F81E4AF408005A4D12 /* UIView+EasyFrame.h */,
+				0F4B09F91E4AF408005A4D12 /* UIView+EasyFrame.m */,
 				0F488B6D1DDA9D8700A68EF3 /* UIView+ViewController.h */,
 				0F488B6E1DDA9D8700A68EF3 /* UIView+ViewController.m */,
+				0F488B681DDA9D8600A68EF3 /* MLMSegmentHead.h */,
+				0F488B691DDA9D8700A68EF3 /* MLMSegmentHead.m */,
+				0F4B0A001E4AF431005A4D12 /* MLMSegmentScroll.h */,
+				0F4B0A011E4AF431005A4D12 /* MLMSegmentScroll.m */,
+				0F4B09FE1E4AF431005A4D12 /* MLMSegmentManager.h */,
+				0F4B09FF1E4AF431005A4D12 /* MLMSegmentManager.m */,
 			);
 			path = MLMSegmentPageView;
 			sourceTree = "<group>";
@@ -311,12 +321,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F30599E1DD9A6B000F4BC16 /* AppDelegate.m in Sources */,
-				0F488B701DDA9D8700A68EF3 /* MLMSegmentPage.m in Sources */,
 				0F3059631DD9A68600F4BC16 /* main.m in Sources */,
 				0F3059A21DD9A6B000F4BC16 /* View.m in Sources */,
 				0F30599F1DD9A6B000F4BC16 /* MainTableViewController.m in Sources */,
 				0F488B6F1DDA9D8700A68EF3 /* MLMSegmentHead.m in Sources */,
 				0F488B711DDA9D8700A68EF3 /* UIView+ViewController.m in Sources */,
+				0F4B0A021E4AF431005A4D12 /* MLMSegmentManager.m in Sources */,
+				0F4B09FC1E4AF408005A4D12 /* UIView+EasyFrame.m in Sources */,
+				0F4B0A031E4AF431005A4D12 /* MLMSegmentScroll.m in Sources */,
 				0F3059A01DD9A6B000F4BC16 /* MainViewController.m in Sources */,
 				0F3059A11DD9A6B000F4BC16 /* ViewController.m in Sources */,
 			);

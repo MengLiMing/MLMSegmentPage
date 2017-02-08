@@ -9,9 +9,8 @@
 #ifndef SegmentPageHead_h
 #define SegmentPageHead_h
 
-#import "MLMSegmentHead.h"
-#import "MLMSegmentPage.h"
 #import "UIView+ViewController.h"
+#import "UIView+EasyFrame.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height

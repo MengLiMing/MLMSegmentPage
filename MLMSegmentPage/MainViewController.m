@@ -9,13 +9,14 @@
 #import "MainViewController.h"
 #import "ViewController.h"
 
-@interface MainViewController () <MLMSegmentPageDelegate>
+@interface MainViewController ()
 {
     NSArray *list;
 }
 @property (strong, nonatomic) UIScrollView *scrollHead;
 
-@property (nonatomic, strong) MLMSegmentPage *pageView;
+@property (nonatomic, strong) MLMSegmentHead *segHead;
+@property (nonatomic, strong) MLMSegmentScroll *segScroll;
 
 @end
 
@@ -23,107 +24,321 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-        
-    list = @[@"一个按钮",
-             @"两个按钮",
-             @"三个按钮",
-             @"四个按钮",
-             @"五个按钮",
-             @"六个按钮",
-             @"七个按钮",
-             @"八个按钮",
-             @"九个按钮",
-             @"十个按钮",
+    NSInteger segStyle = _layout*4 + _style;
+    
+    SEL sel = NSSelectorFromString([NSString stringWithFormat:@"segmentStyle%ld",(long)segStyle]);
+    if ([self respondsToSelector:sel]) {
+        [self performSelector:sel];
+    }
+}
+
+/**********均分**********/
+#pragma mark - 均分默认
+- (void)segmentStyle0 {
+    list = @[@"推荐",
+             @"视频",
+             @"科技",
+             @"美容瘦身",
+             @"互联网",
+             @"值得买",
+             @"购物街",
+             @"体育",
+             @"游戏",
+             @"文玩"
              ];
     
-    _pageView = [[MLMSegmentPage alloc] initSegmentWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) titlesArray:list vcOrviews:[self vcArr]];
-    _pageView.headStyle = _style;
-    _pageView.delegate = self;
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.fontScale = 1.1;
+    _segHead.showIndex = 4;
     
-    switch (_style) {
-        case SegmentHeadStyleDefault:
-        {
-            _pageView.loadAll = YES;
-            
-            _pageView.fontScale = 1.2;
-            _pageView.fontSize = 12;
-            
-            _pageView.showIndex = 4;
-            
-            
-            _pageView.deselectColor = [UIColor grayColor];
-            _pageView.selectColor = [UIColor blackColor];
-        }
-            break;
-        case SegmentHeadStyleLine:
-        {
-            _pageView.loadAll = YES;
-            _pageView.countLimit = 5;
-            
-            _pageView.fontScale = .85;
-            _pageView.fontSize = 14;
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = YES;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        [self.view addSubview:_segHead];
+        [self.view addSubview:_segScroll];
+    }];
+}
 
-            _pageView.lineScale = .9;
-            _pageView.lineHeight = 2;
-            
-            _pageView.deselectColor = [UIColor grayColor];
-            _pageView.selectColor = [UIColor blackColor];
-        }
-            break;
-        case SegmentHeadStyleArrow:
-        {            
-            _pageView.fontScale = 1;
-            
-            _pageView.maxTitleNum = 4;
-            _pageView.countLimit = 4;
-            
-            _pageView.deselectColor = [UIColor grayColor];
-            _pageView.selectColor = [UIColor blackColor];
-        }
-            break;
-        case SegmentHeadStyleSlide:
-        {
-            
-            _pageView.headHeight = 50;
-            _pageView.slideHeight = 50 * 0.8;
-//            _pageView.slideCorner = 0;
-            
-            _pageView.fontSize = 12;
-            _pageView.slideScale = .95;
-            
-            _pageView.selectColor = [UIColor whiteColor];
-            _pageView.deselectColor = [UIColor blackColor];
-        }
-            break;
-        default:
-            break;
-    }
+#pragma mark - 均分下划线
+- (void)segmentStyle1 {
+    list = @[@"推荐",
+             @"视频",
+             @"科技",
+             @"美容瘦身",
+             @"互联网"
+             ];
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.fontScale = .85;
+    _segHead.fontSize = 14;
+    _segHead.lineScale = .9;
     
-    [self.view addSubview:_pageView];
     
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = NO;
+    _segScroll.showIndex = 2;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        [self.view addSubview:_segHead];
+        [self.view addSubview:_segScroll];
+    }];
+}
+
+#pragma mark - 均分箭头
+- (void)segmentStyle2 {
+    list = @[@"推荐",
+             @"视频",
+             @"科技",
+             @"美容瘦身",
+             @"互联网"
+             ];
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.fontScale = .85;
+    _segHead.fontSize = 14;
+    _segHead.maxTitles = 3;
+    
+    
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = NO;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        [self.view addSubview:_segHead];
+        [self.view addSubview:_segScroll];
+    }];
+}
+
+
+#pragma mark - 均分滑块
+- (void)segmentStyle3 {
+    list = @[@"推荐",
+             @"视频",
+             @"科技",
+             @"美容瘦身",
+             @"互联网",
+             @"值得买",
+             @"购物街",
+             @"体育",
+             @"游戏",
+             @"文玩"
+             ];
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.slideHeight = 40 * .9;
+    _segHead.fontSize = 14;
+    _segHead.slideScale = .9;
+    _segHead.selectColor = [UIColor whiteColor];
+    _segHead.deSelectColor = [UIColor blackColor];
+    _segHead.slideColor = [UIColor blackColor];
+    
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = NO;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        [self.view addSubview:_segHead];
+        [self.view addSubview:_segScroll];
+    }];
 }
 
 
 
-- (NSArray *)vcnameArr {
-    return @[@"ViewController",
-             @"ViewController",
-             @"ViewController",
-             @"ViewController",
-             @"ViewController",
-             @"ViewController",
-             @"ViewController",
-             @"ViewController",
-             @"ViewController",
-             @"ViewController"];
+/**********居中，头部菜单较少时使用，设置较多时，则变为left样式**********/
+#pragma mark - 居中默认
+- (void)segmentStyle4 {
+    list = @[@"推荐",
+             @"视频"
+             ];
+    
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.fontScale = 1.1;
+    
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = YES;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        [self.view addSubview:_segHead];
+        [self.view addSubview:_segScroll];
+    }];
 }
 
-- (NSArray *)vcArr {
+#pragma mark - 居中下划线
+- (void)segmentStyle5 {
+    list = @[@"推荐",
+             @"美容瘦身",
+             @"科技"
+             ];
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.headColor = [UIColor clearColor];
+    _segHead.fontScale = .85;
+    _segHead.fontSize = 14;
+    _segHead.lineScale = .9;
+    _segHead.equalSize = YES;
+    _segHead.bottomLineHeight = 0;
+
+
+    
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = NO;
+    _segScroll.showIndex = 2;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        self.navigationItem.titleView = _segHead;
+        [self.view addSubview:_segScroll];
+    }];
+}
+
+#pragma mark - 居中箭头
+- (void)segmentStyle6 {
+    list = @[@"推荐",
+             @"互联网",
+             @"值得买",
+             @"科技"
+             ];
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.fontScale = .85;
+    _segHead.fontSize = 14;
+    _segHead.maxTitles = 3;
+    
+    
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = NO;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        [self.view addSubview:_segHead];
+        [self.view addSubview:_segScroll];
+    }];
+}
+
+
+#pragma mark - 居中滑块
+- (void)segmentStyle7 {
+    list = @[@"推荐",
+             @"视频"
+             ];
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.fontSize = 14;
+    _segHead.bottomLineHeight = 0;
+    _segHead.selectColor = [UIColor whiteColor];
+    _segHead.deSelectColor = [UIColor blackColor];
+    _segHead.slideColor = [UIColor blackColor];
+    _segHead.equalSize = YES;
+    _segHead.headColor = [UIColor redColor];
+    _segHead.layer.cornerRadius = 30/2;
+    _segHead.layer.masksToBounds = YES;
+    [self.view addSubview:_segHead];
+    
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = NO;
+    [self.view addSubview:_segScroll];
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        self.navigationItem.titleView = _segHead;
+        [self.view addSubview:_segScroll];
+        
+    }];
+}
+
+
+/**********居左，头部菜单较少时使用，设置较多时，则变为left样式**********/
+#pragma mark - 居左默认
+- (void)segmentStyle8 {
+    list = @[@"推荐",
+             @"视频"
+             ];
+    
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.fontScale = 1.1;
+    
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = YES;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        [self.view addSubview:_segHead];
+        [self.view addSubview:_segScroll];
+    }];
+}
+
+#pragma mark - 居左下划线
+- (void)segmentStyle9 {
+    list = @[@"推荐",
+             @"美容瘦身",
+             @"科技"
+             ];
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.fontScale = .85;
+    _segHead.fontSize = 14;
+    _segHead.lineScale = .9;
+    
+    
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = NO;
+    _segScroll.showIndex = 2;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        [self.view addSubview:_segHead];
+        [self.view addSubview:_segScroll];
+    }];
+}
+
+#pragma mark - 居左箭头
+- (void)segmentStyle10 {
+    list = @[@"推荐",
+             @"互联网",
+             @"值得买",
+             @"科技"
+             ];
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.fontScale = .85;
+    _segHead.fontSize = 14;
+    _segHead.maxTitles = 3;
+
+    
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = NO;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        [self.view addSubview:_segHead];
+        [self.view addSubview:_segScroll];
+    }];
+}
+
+
+#pragma mark - 居左滑块
+- (void)segmentStyle11 {
+    list = @[@"推荐",
+             @"视频",
+             @"科技",
+             @"美容瘦身",
+             @"互联网",
+             @"值得买",
+             @"购物街",
+             @"体育",
+             @"游戏",
+             @"文玩"
+             ];
+    _segHead = [[MLMSegmentHead alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40) titles:list headStyle:_style layoutStyle:_layout];
+    _segHead.slideHeight = 40 * .9;
+    _segHead.fontSize = 14;
+    _segHead.slideScale = .9;
+    _segHead.selectColor = [UIColor whiteColor];
+    _segHead.deSelectColor = [UIColor blackColor];
+    _segHead.slideColor = [UIColor blackColor];
+    
+    _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.loadAll = NO;
+    
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+        [self.view addSubview:_segHead];
+        [self.view addSubview:_segScroll];
+    }];
+}
+
+
+#pragma mark - 数据源
+- (NSArray *)vcArr:(NSInteger)count {
     NSMutableArray *arr = [NSMutableArray array];
-    for (NSInteger i = 0; i < list.count; i ++) {
+    for (NSInteger i = 0; i < count; i ++) {
         ViewController *vc = [ViewController new];
         vc.index = i;
         [arr addObject:vc];
@@ -131,6 +346,15 @@
     return arr;
 }
 
+
+- (NSArray *)viewArr:(NSInteger)count {
+    NSMutableArray *arr = [NSMutableArray array];
+    for (NSInteger i = 0; i < count; i ++) {
+        UIView *view = [NSClassFromString(@"View") new];
+        [arr addObject:view];
+    }
+    return arr;
+}
 
 - (NSArray *)viewNameArr {
     return @[@"View",
@@ -142,28 +366,22 @@
              @"View",
              @"View",
              @"View",
-             @"View"];
+             @"View"
+             ];
 }
 
-
-
-- (NSArray *)viewArr {
-    NSMutableArray *arr = [NSMutableArray array];
-    for (NSInteger i = 0; i < list.count; i ++) {
-        UIView *view = [NSClassFromString(@"View") new];
-        [arr addObject:view];
-    }
-    return arr;
-}
-
-
-#pragma mark - delegate
-- (void)scrollThroughIndex:(NSInteger)index {
-//    NSLog(@"scroll through %@",@(index));
-}
-
-- (void)selectedIndex:(NSInteger)index {
-//    NSLog(@"select %@",@(index));
+- (NSArray *)vcnameArr {
+    return @[@"ViewController",
+             @"ViewController",
+             @"ViewController",
+             @"ViewController",
+             @"ViewController",
+             @"ViewController",
+             @"ViewController",
+             @"ViewController",
+             @"ViewController",
+             @"ViewController"
+             ];
 }
 
 @end

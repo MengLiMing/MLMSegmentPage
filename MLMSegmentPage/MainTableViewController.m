@@ -12,6 +12,8 @@
 @interface MainTableViewController ()
 {
     NSArray *styleList;
+    
+    NSArray *layoutList;
 }
 @end
 
@@ -19,12 +21,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"MLMSegmentPage";
     styleList = @[
                   @"SegmentHeadStyleDefault",
                   @"SegmentHeadStyleLine",
                   @"SegmentHeadStyleArrow",
-                  @"SegmentHeadStyleSlide"];
+                  @"SegmentHeadStyleSlide"
+                  ];
+    
+    layoutList = @[
+                   @"MLMSegmentLayoutDefault",
+                   @"MLMSegmentLayoutCenter",
+                   @"MLMSegmentLayoutLeft"
+                   ];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,7 +44,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return layoutList.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -55,9 +64,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MainViewController *vc = [MainViewController new];
     vc.style = indexPath.row;
+    vc.layout = indexPath.section;
     vc.title = styleList[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 30.f;
+}
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UILabel *label  = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
+    label.text = layoutList[section];
+    label.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    return label;
+}
 @end

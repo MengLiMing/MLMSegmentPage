@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MLMSegmentPage.h"
+#import "MLMSegmentManager.h"
 
 @interface MainViewController : UIViewController
 
 @property (nonatomic, assign) MLMSegmentHeadStyle style;
+@property (nonatomic, assign) MLMSegmentLayoutStyle layout;
+
 @end
