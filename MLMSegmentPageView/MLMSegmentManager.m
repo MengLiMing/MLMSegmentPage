@@ -33,12 +33,12 @@
     scroll.offsetScale = ^(CGFloat scale) {
         [head changePointScale:scale];
     };
-    [scroll createView];
     
     if (completion) {
         completion();
     }
-    
+    [scroll createView];
+
     UIView *view = head.nextResponder?head:scroll;
     UIViewController *currentVC = [view viewController];
     currentVC.automaticallyAdjustsScrollViewInsets = NO;
