@@ -2,6 +2,7 @@
 manage your controllers or views
 
 * 快速集成顶部菜单栏
+* 拆分为MLMSegementHead和MLMSegmenScroll，分别设置，使用更灵活
 
 ## 效果
  * 单独创建自己的ViewController,低耦合，具体操作在自己的ViewController中实现
@@ -10,12 +11,17 @@ manage your controllers or views
  * 设置初次进入显示的页面，
  * 设置初次进入加载的页面数目，和滑动过程中页面中保留的页面数目
 
-## 预览
+## 部分样式预览
 
-![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/default.gif)
-![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/line.gif)
-![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/arrow.gif)
-![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/slide.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/Center_Line.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/Center_Slide.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/Left_Slide.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/Left_Line.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/Center_Default.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/Center_Arrow.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/Default_Line.gif)
+![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/Default_Slide.gif)
+
 
 ## 安装
 
