@@ -13,7 +13,6 @@
 {
     NSArray *list;
 }
-@property (strong, nonatomic) UIScrollView *scrollHead;
 
 @property (nonatomic, strong) MLMSegmentHead *segHead;
 @property (nonatomic, strong) MLMSegmentScroll *segScroll;
