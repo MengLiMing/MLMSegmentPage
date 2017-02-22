@@ -163,7 +163,7 @@ typedef enum : NSUInteger {
 /**
  *  设置当前屏幕最多显示的按钮数,只有在默认布局样式 - MLMSegmentLayoutDefault 下使用
  */
-@property (nonatomic, assign) NSInteger maxTitles;
+@property (nonatomic, assign) CGFloat maxTitles;
 
 
 /**

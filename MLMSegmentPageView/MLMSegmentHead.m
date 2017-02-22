@@ -113,7 +113,7 @@ static CGFloat animation_time = .3;
     _slideCorner = _slideHeight/2;
     
     _slideScale = 1;
-    _maxTitles = 5;
+    _maxTitles = 5.0;
     
     _bottomLineColor = [UIColor grayColor];
     _bottomLineHeight = 1;
