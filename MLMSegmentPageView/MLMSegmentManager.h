@@ -21,9 +21,9 @@
            withScroll:(MLMSegmentScroll *)scroll
            completion:(void(^)())completion;
 
-
 + (void)associateHead:(MLMSegmentHead *)head
            withScroll:(MLMSegmentScroll *)scroll
+     contentChangeAni:(BOOL)ani
            completion:(void(^)())completion
             selectEnd:(void(^)(NSInteger index))selectEnd;
 

@@ -12,6 +12,8 @@
 @interface MLMSegmentScroll () <NSCacheDelegate,UIScrollViewDelegate>
 {
     NSMutableArray *viewsArray;
+    
+    CGFloat start_offset_x;
 }
 @property (nonatomic, strong) NSCache *viewsCache;//存储页面(使用计数功能)
 
@@ -68,7 +70,7 @@
             [self addViewCacheIndex:i];
         }
     } else {
-        [self addViewCacheIndex:_showIndex];
+        [self setContentOffset:CGPointMake(_showIndex*self.width, 0) animated:NO];
     }
 }
 
@@ -135,50 +137,70 @@
 }
 
 
+- (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated {
+    [super setContentOffset:contentOffset animated:animated];
+    NSInteger currentIndex = self.contentOffset.x/self.frame.size.width;
+    if (!animated) {
+        if ([self.segDelegate respondsToSelector:@selector(animationEndIndex:)]) {
+            [self.segDelegate animationEndIndex:currentIndex];
+        } else if (self.animationEnd) {
+            self.animationEnd(currentIndex);
+        }
+    }
+    if (![_viewsCache objectForKey:@(currentIndex)]) {
+        [self addViewCacheIndex:currentIndex];
+    }
+}
+
 #pragma mark - scrollDelegate
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    start_offset_x = scrollView.contentOffset.x;
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if ([scrollView isEqual:self]) {
-        CGFloat scale = scrollView.contentOffset.x/scrollView.contentSize.width;
-        if ([self.segDelegate respondsToSelector:@selector(scrollOffsetScale:)]) {
-            [self.segDelegate scrollOffsetScale:scale];
-        } else if (self.offsetScale) {
-            self.offsetScale(scale);
+    CGFloat scale = self.contentOffset.x/self.contentSize.width;
+    if ([self.segDelegate respondsToSelector:@selector(scrollOffsetScale:)]) {
+        [self.segDelegate scrollOffsetScale:scale];
+    } else if (self.offsetScale) {
+        self.offsetScale(scale);
+    }
+    
+    if (_addTiming == SegmentAddScale) {
+        NSInteger currentIndex = self.contentOffset.x/self.frame.size.width;
+        BOOL left = start_offset_x>=self.contentOffset.x;
+        NSInteger next_index = MAX(MIN(viewsArray.count-1, left?currentIndex:currentIndex+1), 0);
+        if (fabs(scale*viewsArray.count-next_index)<(1-_addScale)) {
+            if (![_viewsCache objectForKey:@(next_index)]) {
+                [self addViewCacheIndex:next_index];
+            }
         }
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    if ([scrollView isEqual:self]) {
-        //滑动结束
-        NSInteger currentIndex = scrollView.contentOffset.x/scrollView.frame.size.width;
-        if ([self.segDelegate respondsToSelector:@selector(scrollEndIndex:)]) {
-            [self.segDelegate scrollEndIndex:currentIndex];
-        } else if (self.scrollEnd) {
-            self.scrollEnd(currentIndex);
-        }
+    //滑动结束
+    NSInteger currentIndex = self.contentOffset.x/self.frame.size.width;
+    if ([self.segDelegate respondsToSelector:@selector(scrollEndIndex:)]) {
+        [self.segDelegate scrollEndIndex:currentIndex];
+    } else if (self.scrollEnd) {
+        self.scrollEnd(currentIndex);
+    }
+    if (_addTiming == SegmentAddNormal) {
         if (![_viewsCache objectForKey:@(currentIndex)]) {
             [self addViewCacheIndex:currentIndex];
         }
     }
-    
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    if ([scrollView isEqual:self]) {
-        //动画结束
-        NSInteger currentIndex = scrollView.contentOffset.x/scrollView.frame.size.width;
-        if ([self.segDelegate respondsToSelector:@selector(scrollEndIndex:)]) {
-            [self.segDelegate animationEndIndex:currentIndex];
-        } else if (self.animationEnd) {
-            self.animationEnd(currentIndex);
-        }
-        if (![_viewsCache objectForKey:@(currentIndex)]) {
-            [self addViewCacheIndex:currentIndex];
-        }
+    //动画结束
+    NSInteger currentIndex = self.contentOffset.x/self.frame.size.width;
+    if ([self.segDelegate respondsToSelector:@selector(animationEndIndex:)]) {
+        [self.segDelegate animationEndIndex:currentIndex];
+    } else if (self.animationEnd) {
+        self.animationEnd(currentIndex);
     }
 }
-
-
 
 #pragma mark - NSCacheDelegate
 -(void)cache:(NSCache *)cache willEvictObject:(id)obj {

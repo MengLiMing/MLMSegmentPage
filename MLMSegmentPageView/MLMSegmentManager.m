@@ -11,15 +11,19 @@
 
 @implementation MLMSegmentManager
 
+
+
+
 + (void)associateHead:(MLMSegmentHead *)head
            withScroll:(MLMSegmentScroll *)scroll
            completion:(void(^)())completion {
-    [MLMSegmentManager associateHead:head withScroll:scroll completion:completion selectEnd:nil];
+    [MLMSegmentManager associateHead:head withScroll:scroll contentChangeAni:YES completion:completion selectEnd:nil];
 }
 
 
 + (void)associateHead:(MLMSegmentHead *)head
            withScroll:(MLMSegmentScroll *)scroll
+     contentChangeAni:(BOOL)ani
            completion:(void(^)())completion
             selectEnd:(void(^)(NSInteger index))selectEnd {
     NSInteger showIndex;
@@ -27,21 +31,23 @@
     head.showIndex = scroll.showIndex = showIndex;
     
     head.selectedIndex = ^(NSInteger index) {
-        [scroll setContentOffset:CGPointMake(index*scroll.width, 0) animated:YES];
-        if (selectEnd) {
-            selectEnd(index);
-        }
+        [scroll setContentOffset:CGPointMake(index*scroll.width, 0) animated:ani];
     };
     [head defaultAndCreateView];
     
     scroll.scrollEnd = ^(NSInteger index) {
         [head setSelectIndex:index];
+        //在点击之后调用
         if (selectEnd) {
             selectEnd(index);
         }
     };
     scroll.animationEnd = ^(NSInteger index) {
+        //在动画结束后调用
         [head animationEnd];
+        if (selectEnd) {
+            selectEnd(index);
+        }
     };
     scroll.offsetScale = ^(CGFloat scale) {
         [head changePointScale:scale];

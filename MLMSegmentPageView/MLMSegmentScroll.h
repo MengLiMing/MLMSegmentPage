@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+//添加子视图的时机
+typedef enum : NSUInteger {
+    SegmentAddNormal,//滑动或者动画结束
+    SegmentAddScale//根据设置滑动百分比添加0-1
+} SegmentAddTiming;
+
 @protocol MLMSegmentScrollDelegate <NSObject>
 
 ///滑动结束
@@ -36,6 +42,10 @@
 @property (nonatomic, copy) void(^animationEnd)(NSInteger);
 @property (nonatomic, copy) void(^offsetScale)(CGFloat);
 
+///添加时机,默认动画或者滑动结束添加
+@property (nonatomic, assign) SegmentAddTiming addTiming;
+///SegmentAddScale 时使用
+@property (nonatomic, assign) CGFloat addScale;
 
 - (instancetype)initWithFrame:(CGRect)frame vcOrViews:(NSArray *)sources;
 

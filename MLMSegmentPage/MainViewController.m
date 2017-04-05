@@ -140,8 +140,6 @@
     }];
 }
 
-
-
 /**********居中，头部菜单较少时使用，设置较多时，则变为left样式**********/
 #pragma mark - 居中默认
 - (void)segmentStyle4 {
@@ -325,11 +323,15 @@
     _segHead.slideColor = [UIColor blackColor];
     
     _segScroll = [[MLMSegmentScroll alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segHead.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetMaxY(_segHead.frame)) vcOrViews:[self vcArr:list.count]];
+    _segScroll.addTiming = SegmentAddScale;
+    _segScroll.addScale = 0.1;
     _segScroll.loadAll = NO;
     
-    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll completion:^{
+    [MLMSegmentManager associateHead:_segHead withScroll:_segScroll contentChangeAni:NO completion:^{
         [self.view addSubview:_segHead];
         [self.view addSubview:_segScroll];
+    } selectEnd:^(NSInteger index) {
+        NSLog(@"第%ld个视图,有什么操作?",index);
     }];
 }
 
