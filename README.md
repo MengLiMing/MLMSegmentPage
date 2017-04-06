@@ -12,9 +12,23 @@ manage your controllers or views
  * 设置初次进入显示的页面，
  * 设置初次进入加载的页面数目，和滑动过程中页面中保留的页面数目
 
+## 添加
+```objc
+MLMSegmentScroll
+//添加子视图的时机
+typedef enum : NSUInteger {
+    SegmentAddNormal,//滑动或者动画结束
+    SegmentAddScale//根据设置滑动百分比添加0-1
+} SegmentAddTiming;
+
+///SegmentAddScale 时使用 0-1
+@property (nonatomic, assign) CGFloat addScale;
+```
+
 ## 样式
 
 ```objc
+MLMSegmentHead
 //风格
 typedef enum : NSUInteger {
     /**
@@ -52,6 +66,7 @@ typedef enum : NSUInteger {
     
 } MLMSegmentLayoutStyle;
 ```
+
 ## 部分样式预览
 
 ![image](https://github.com/MengLiMing/MLMSegmentPage/blob/master/gif/Center_Line.gif)
