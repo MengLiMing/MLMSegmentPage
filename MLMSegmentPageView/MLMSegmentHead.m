@@ -150,11 +150,8 @@ static CGFloat animation_time = .3;
     }
     
     _showIndex = MIN(titlesArray.count-1, MAX(0, _showIndex));
-    currentIndex = _showIndex;
-    [self createView];
-    
 
-    
+    [self createView];
     
     [self setSelectIndex:_showIndex];
 }
@@ -380,24 +377,45 @@ static CGFloat animation_time = .3;
 
 #pragma mark - button Action
 - (void)selectedHeadTitles:(UIButton *)button {
+    NSInteger selectIndex = [buttonArray indexOfObject:button];
+    [self setSelectIndex:selectIndex];
+}
+
+#pragma mark - 点击结束
+- (void)animationEnd {
+    isSelected = NO;
+}
+
+#pragma mark - set index
+- (void)setSelectIndex:(NSInteger)index {
     //before
     UIButton *before_btn = buttonArray[currentIndex];
-    
-    NSInteger selectIndex = [buttonArray indexOfObject:button];
-    
-    //repeat click
-    if (selectIndex == currentIndex) {
+    if (index == currentIndex) {
         return;
     }
+    currentIndex = index;
+    
+    if (sum_width > SCROLL_WIDTH) {
+        UIButton *currentBtn = buttonArray[index];
+        if (currentBtn.center.x<SCROLL_WIDTH/2) {
+            [titlesScroll setContentOffset:CGPointMake(0, 0) animated:YES];
+        } else if (currentBtn.center.x > (sum_width-SCROLL_WIDTH/2)) {
+            [titlesScroll setContentOffset:CGPointMake(sum_width-SCROLL_WIDTH, 0) animated:YES];
+        } else {
+            [titlesScroll setContentOffset:CGPointMake(currentBtn.center.x - SCROLL_WIDTH/2, 0) animated:YES];
+        }
+    }
+    
+    
     //select
-    UIButton *select_btn = buttonArray[selectIndex];
-
+    UIButton *select_btn = buttonArray[currentIndex];
+    
     [UIView animateWithDuration:animation_time animations:^{
         if (_headStyle != SegmentHeadStyleSlide) {
             [before_btn setTitleColor:_deSelectColor forState:UIControlStateNormal];
             [select_btn setTitleColor:_selectColor forState:UIControlStateNormal];
         }
-
+        
         if (_fontScale) {
             before_btn.titleLabel.font = [UIFont systemFontOfSize:_fontSize];
             select_btn.titleLabel.font = [UIFont systemFontOfSize:_fontSize*_fontScale];
@@ -421,35 +439,13 @@ static CGFloat animation_time = .3;
             slideScroll.frame = CGRectMake(convertRect.origin.x, convertRect.origin.y, slideScroll.contentSize.width, slideScroll.contentSize.height);
         }
     } completion:^(BOOL finished) {
-        [self setSelectIndex:selectIndex];
     }];
-
+    
     isSelected = YES;
     if ([self.delegate respondsToSelector:@selector(didSelectedIndex:)]) {
-        [self.delegate didSelectedIndex:selectIndex];
+        [self.delegate didSelectedIndex:currentIndex];
     } else if (self.selectedIndex) {
-        self.selectedIndex(selectIndex);
-    }
-}
-
-#pragma mark - 点击结束
-- (void)animationEnd {
-    isSelected = NO;
-}
-
-#pragma mark - set index
-- (void)setSelectIndex:(NSInteger)index {
-    currentIndex = index;
-    
-    if (sum_width > SCROLL_WIDTH) {
-        UIButton *currentBtn = buttonArray[index];
-        if (currentBtn.center.x<SCROLL_WIDTH/2) {
-            [titlesScroll setContentOffset:CGPointMake(0, 0) animated:YES];
-        } else if (currentBtn.center.x > (sum_width-SCROLL_WIDTH/2)) {
-            [titlesScroll setContentOffset:CGPointMake(sum_width-SCROLL_WIDTH, 0) animated:YES];
-        } else {
-            [titlesScroll setContentOffset:CGPointMake(currentBtn.center.x - SCROLL_WIDTH/2, 0) animated:YES];
-        }
+        self.selectedIndex(currentIndex);
     }
 }
 

@@ -37,13 +37,13 @@
     
     scroll.scrollEnd = ^(NSInteger index) {
         [head setSelectIndex:index];
-        //在点击之后调用
+        [head animationEnd];
         if (selectEnd) {
             selectEnd(index);
         }
     };
     scroll.animationEnd = ^(NSInteger index) {
-        //在动画结束后调用
+        [head setSelectIndex:index];
         [head animationEnd];
         if (selectEnd) {
             selectEnd(index);
