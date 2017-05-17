@@ -54,7 +54,8 @@ static CGFloat animation_time = .3;
     
     NSInteger currentIndex;//当前选中的按钮
     
-    NSInteger isSelected;//区分点击还是滑动
+    //在与外侧scroll关联时，动画结束之后将其设置为NO
+    BOOL isSelected;//区分点击还是滑动
     
     
     //button宽度的数组，总宽度
@@ -154,6 +155,7 @@ static CGFloat animation_time = .3;
     [self createView];
     
     [self setSelectIndex:_showIndex];
+    isSelected = NO;
 }
 
 
