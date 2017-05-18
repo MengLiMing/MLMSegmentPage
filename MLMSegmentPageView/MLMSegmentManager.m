@@ -26,6 +26,8 @@
      contentChangeAni:(BOOL)ani
            completion:(void(^)())completion
             selectEnd:(void(^)(NSInteger index))selectEnd {
+    
+    
     NSInteger showIndex;
     showIndex = head.showIndex?head.showIndex:scroll.showIndex;
     head.showIndex = scroll.showIndex = showIndex;
@@ -34,6 +36,10 @@
         [scroll setContentOffset:CGPointMake(index*scroll.width, 0) animated:ani];
     };
     [head defaultAndCreateView];
+    
+    if (completion) {
+        completion();
+    }
     
     scroll.scrollEnd = ^(NSInteger index) {
         [head setSelectIndex:index];
@@ -53,9 +59,6 @@
         [head changePointScale:scale];
     };
     
-    if (completion) {
-        completion();
-    }
     [scroll createView];
     
     UIView *view = head.nextResponder?head:scroll;
