@@ -9,7 +9,7 @@
 #ifndef SegmentPageHead_h
 #define SegmentPageHead_h
 
-#import "UIView+ViewController.h"
+#import "UIViewController+CurrentVC.h"
 #import "UIView+EasyFrame.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
