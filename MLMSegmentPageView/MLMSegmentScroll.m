@@ -123,7 +123,7 @@
     }
     
     vc.view.frame = CGRectMake(index*self.width, 0, self.width, self.height);
-    [[UIViewController getCurrentVC] addChildViewController:vc];
+    [self.viewController addChildViewController:vc];
     [self addSubview:vc.view];
 }
 

@@ -58,7 +58,8 @@
     }
     [scroll createView];
     
-    UIViewController *currentVC = [UIViewController getCurrentVC];
+    UIView *view = head.nextResponder?head:scroll;
+    UIViewController *currentVC = [view viewController];
     currentVC.automaticallyAdjustsScrollViewInsets = NO;
 }
 
