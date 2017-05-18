@@ -139,7 +139,7 @@
 
 - (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated {
     [super setContentOffset:contentOffset animated:animated];
-    NSInteger currentIndex = self.contentOffset.x/self.frame.size.width;
+    NSInteger currentIndex = contentOffset.x/self.frame.size.width;
     if (!animated) {
         if ([self.segDelegate respondsToSelector:@selector(animationEndIndex:)]) {
             [self.segDelegate animationEndIndex:currentIndex];

@@ -154,8 +154,12 @@ static CGFloat animation_time = .3;
 
     [self createView];
     
-    [self setSelectIndex:_showIndex];
-    isSelected = NO;
+    if (_showIndex != 0) {
+        currentIndex = _showIndex;
+        [self changeContentOffset];
+        [self changeBtnFrom:0 to:_showIndex];
+    }
+    
 }
 
 
@@ -390,15 +394,29 @@ static CGFloat animation_time = .3;
 
 #pragma mark - set index
 - (void)setSelectIndex:(NSInteger)index {
-    //before
-    UIButton *before_btn = buttonArray[currentIndex];
     if (index == currentIndex) {
         return;
     }
+    //before
+    NSInteger before = currentIndex;
     currentIndex = index;
-    
+    [self changeContentOffset];
+    //select
+    [UIView animateWithDuration:animation_time animations:^{
+        [self changeBtnFrom:before to:currentIndex];
+    } completion:^(BOOL finished) {
+    }];
+    isSelected = YES;
+    if ([self.delegate respondsToSelector:@selector(didSelectedIndex:)]) {
+        [self.delegate didSelectedIndex:currentIndex];
+    } else if (self.selectedIndex) {
+        self.selectedIndex(currentIndex);
+    }
+}
+
+- (void)changeContentOffset {
     if (sum_width > SCROLL_WIDTH) {
-        UIButton *currentBtn = buttonArray[index];
+        UIButton *currentBtn = buttonArray[currentIndex];
         if (currentBtn.center.x<SCROLL_WIDTH/2) {
             [titlesScroll setContentOffset:CGPointMake(0, 0) animated:YES];
         } else if (currentBtn.center.x > (sum_width-SCROLL_WIDTH/2)) {
@@ -407,47 +425,37 @@ static CGFloat animation_time = .3;
             [titlesScroll setContentOffset:CGPointMake(currentBtn.center.x - SCROLL_WIDTH/2, 0) animated:YES];
         }
     }
+}
+
+- (void)changeBtnFrom:(NSInteger)from to:(NSInteger)to {
+    UIButton *before_btn = buttonArray[from];
+    UIButton *select_btn = buttonArray[to];
+    if (_headStyle != SegmentHeadStyleSlide) {
+        [before_btn setTitleColor:_deSelectColor forState:UIControlStateNormal];
+        [select_btn setTitleColor:_selectColor forState:UIControlStateNormal];
+    }
     
+    if (_fontScale) {
+        before_btn.titleLabel.font = [UIFont systemFontOfSize:_fontSize];
+        select_btn.titleLabel.font = [UIFont systemFontOfSize:_fontSize*_fontScale];
+    }
     
-    //select
-    UIButton *select_btn = buttonArray[currentIndex];
+    if (lineView) {
+        lineView.width = select_btn.width*_lineScale;
+        lineView.center = CGPointMake(select_btn.center.x, lineView.center.y);
+    }
     
-    [UIView animateWithDuration:animation_time animations:^{
-        if (_headStyle != SegmentHeadStyleSlide) {
-            [before_btn setTitleColor:_deSelectColor forState:UIControlStateNormal];
-            [select_btn setTitleColor:_selectColor forState:UIControlStateNormal];
-        }
-        
-        if (_fontScale) {
-            before_btn.titleLabel.font = [UIFont systemFontOfSize:_fontSize];
-            select_btn.titleLabel.font = [UIFont systemFontOfSize:_fontSize*_fontScale];
-        }
-        
-        if (lineView) {
-            lineView.width = select_btn.width*_lineScale;
-            lineView.center = CGPointMake(select_btn.center.x, lineView.center.y);
-        }
-        
-        if (arrow_layer) {
-            arrow_layer.position = CGPointMake(lineView.width/2, lineView.height/2);
-        }
-        
-        if (slideView) {
-            //slide位置变化
-            slideView.width = select_btn.width*_slideScale;
-            slideView.center = CGPointMake(select_btn.center.x, slideView.center.y);
-            //偏移
-            CGRect convertRect = [slideView convertRect:titlesScroll.frame fromView:titlesScroll];
-            slideScroll.frame = CGRectMake(convertRect.origin.x, convertRect.origin.y, slideScroll.contentSize.width, slideScroll.contentSize.height);
-        }
-    } completion:^(BOOL finished) {
-    }];
+    if (arrow_layer) {
+        arrow_layer.position = CGPointMake(lineView.width/2, lineView.height/2);
+    }
     
-    isSelected = YES;
-    if ([self.delegate respondsToSelector:@selector(didSelectedIndex:)]) {
-        [self.delegate didSelectedIndex:currentIndex];
-    } else if (self.selectedIndex) {
-        self.selectedIndex(currentIndex);
+    if (slideView) {
+        //slide位置变化
+        slideView.width = select_btn.width*_slideScale;
+        slideView.center = CGPointMake(select_btn.center.x, slideView.center.y);
+        //偏移
+        CGRect convertRect = [slideView convertRect:titlesScroll.frame fromView:titlesScroll];
+        slideScroll.frame = CGRectMake(convertRect.origin.x, convertRect.origin.y, slideScroll.contentSize.width, slideScroll.contentSize.height);
     }
 }
 
