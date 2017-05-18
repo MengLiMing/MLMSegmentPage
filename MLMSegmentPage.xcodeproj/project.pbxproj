@@ -476,7 +476,7 @@
 				INFOPLIST_FILE = MLMSegmentPage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlm.MLMSegmen;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mlm.MLMSegmentPage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -491,7 +491,7 @@
 				INFOPLIST_FILE = MLMSegmentPage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlm.MLMSegmen;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mlm.MLMSegmentPage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
