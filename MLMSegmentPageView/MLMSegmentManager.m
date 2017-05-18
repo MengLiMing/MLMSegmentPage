@@ -27,19 +27,14 @@
            completion:(void(^)())completion
             selectEnd:(void(^)(NSInteger index))selectEnd {
     
-    
     NSInteger showIndex;
     showIndex = head.showIndex?head.showIndex:scroll.showIndex;
-    head.showIndex = scroll.showIndex = showIndex;
+    
+    [head defaultAndCreateView];
     
     head.selectedIndex = ^(NSInteger index) {
         [scroll setContentOffset:CGPointMake(index*scroll.width, 0) animated:ani];
     };
-    [head defaultAndCreateView];
-    
-    if (completion) {
-        completion();
-    }
     
     scroll.scrollEnd = ^(NSInteger index) {
         [head setSelectIndex:index];
@@ -58,6 +53,12 @@
     scroll.offsetScale = ^(CGFloat scale) {
         [head changePointScale:scale];
     };
+    
+    if (completion) {
+        completion();
+    }
+    
+    head.showIndex = scroll.showIndex = showIndex;
     
     [scroll createView];
     
