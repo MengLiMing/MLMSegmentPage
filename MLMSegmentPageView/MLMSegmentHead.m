@@ -312,7 +312,7 @@ static CGFloat animation_time = .3;
         if (_fontScale != 1) {
             curBtn.titleLabel.font = [UIFont systemFontOfSize:_fontSize*_fontScale];
         }
-        [curBtn setTitleColor:_selectColor forState:UIControlStateNormal];
+        [curBtn setTintColor:_selectColor];
     }
 }
 
@@ -328,11 +328,11 @@ static CGFloat animation_time = .3;
         button.frame = CGRectMake(start_x, 0, width, SCROLL_HEIGHT);
         start_x += width;
         if (titles) {
-            [button setTitleColor:_deSelectColor forState:UIControlStateNormal];
+            [button setTintColor:_deSelectColor];
             [button addTarget:self action:@selector(selectedHeadTitles:) forControlEvents:UIControlEventTouchUpInside];
             [buttonArray addObject:button];
         } else {
-            [button setTitleColor:_selectColor forState:UIControlStateNormal];
+            [button setTintColor:_selectColor];
         }
         [scroll addSubview:button];
     }
@@ -431,8 +431,8 @@ static CGFloat animation_time = .3;
     UIButton *before_btn = buttonArray[from];
     UIButton *select_btn = buttonArray[to];
     if (_headStyle != SegmentHeadStyleSlide) {
-        [before_btn setTitleColor:_deSelectColor forState:UIControlStateNormal];
-        [select_btn setTitleColor:_selectColor forState:UIControlStateNormal];
+        [before_btn setTintColor:_deSelectColor];
+        [select_btn setTintColor:_selectColor];
     }
     
     if (_fontScale) {
@@ -586,16 +586,14 @@ static CGFloat animation_time = .3;
         CGFloat blue_changge = sel_blue - de_sel_blue;
         CGFloat alpha_changge = sel_alpha - de_sel_alpha;
         //颜色变化
-        [nextBtn setTitleColor:[UIColor colorWithRed:de_sel_red + red_changge*changeScale
+        [nextBtn setTintColor:[UIColor colorWithRed:de_sel_red + red_changge*changeScale
                                                green:de_sel_green + green_changge*changeScale
                                                 blue:de_sel_blue + blue_changge*changeScale
-                                               alpha:de_sel_alpha + alpha_changge*changeScale]
-                      forState:UIControlStateNormal];
-        [curBtn setTitleColor:[UIColor colorWithRed:sel_red - red_changge*changeScale
+                                               alpha:de_sel_alpha + alpha_changge*changeScale]];
+        [curBtn setTintColor:[UIColor colorWithRed:sel_red - red_changge*changeScale
                                                   green:sel_green - green_changge*changeScale
                                                    blue:sel_blue - blue_changge*changeScale
-                                                  alpha:sel_alpha - alpha_changge*changeScale]
-                         forState:UIControlStateNormal];
+                                                  alpha:sel_alpha - alpha_changge*changeScale]];
     }
 }
 
