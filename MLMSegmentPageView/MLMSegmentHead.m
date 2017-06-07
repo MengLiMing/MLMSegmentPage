@@ -322,7 +322,7 @@ static CGFloat animation_time = .3;
     CGFloat width;
     for (NSInteger i = start_index; i < titlesArr.count; i ++) {
         width = CURRENT_WIDTH(i);
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:titlesArr[i] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:_fontSize];
         button.frame = CGRectMake(start_x, 0, width, SCROLL_HEIGHT);
