@@ -45,7 +45,7 @@
     scroll.scrollEnd = ^(NSInteger index) {
         [head setSelectIndex:index];
         [head animationEnd];
-        if (selectEnd) {
+        if (selectEnd && ani) {
             selectEnd(index);
         }
     };
