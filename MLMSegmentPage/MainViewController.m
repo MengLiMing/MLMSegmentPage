@@ -385,4 +385,7 @@
              ];
 }
 
+- (void)dealloc {
+    NSLog(@"释放");
+}
 @end

@@ -40,6 +40,10 @@
         });
     };
     
+    if (completion) {
+        completion();
+    }
+    
     WEAK(weakHead, head)
     scroll.scrollEnd = ^(NSInteger index) {
         [weakHead setSelectIndex:index];
@@ -62,10 +66,6 @@
     
     scroll.showIndex = showIndex;
     [scroll createView];
-    
-    if (completion) {
-        completion();
-    }
     
     UIView *view = head.nextResponder?head:scroll;
     UIViewController *currentVC = [view viewController];

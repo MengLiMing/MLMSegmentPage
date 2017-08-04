@@ -38,4 +38,8 @@
     vc.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+- (void)dealloc {
+    NSLog(@"释放");
+}
 @end
