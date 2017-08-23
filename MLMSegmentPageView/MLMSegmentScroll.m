@@ -224,6 +224,7 @@
 #pragma mark - dealloc
 - (void)dealloc {
     self.delegate = nil;
+    [_viewsCache removeAllObjects];
     _viewsCache.delegate = nil;
     _viewsCache = nil;
 }
