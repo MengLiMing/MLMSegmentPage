@@ -11,11 +11,10 @@
 
 @interface MLMSegmentScroll () <NSCacheDelegate,UIScrollViewDelegate>
 {
-    NSMutableArray *viewsArray;
-    
     CGFloat start_offset_x;
 }
 @property (nonatomic, strong) NSCache *viewsCache;//存储页面(使用计数功能)
+@property (nonatomic, strong) NSMutableArray *viewsArray;
 
 @end
 
@@ -24,7 +23,7 @@
 #pragma mark - init Method
 - (instancetype)initWithFrame:(CGRect)frame vcOrViews:(NSArray *)sources {
     if (self = [super initWithFrame:frame]) {
-        viewsArray = [sources mutableCopy];
+        _viewsArray = [sources mutableCopy];
         [self defaultSet];
     }
     return self;
@@ -37,9 +36,9 @@
     self.pagingEnabled = YES;
     self.bounces = NO;
     self.delegate = self;
-    [self setContentSize:CGSizeMake(viewsArray.count *self.width, self.height)];
+    [self setContentSize:CGSizeMake(_viewsArray.count *self.width, self.height)];
     
-    _countLimit = viewsArray.count;
+    _countLimit = _viewsArray.count;
 }
 
 #pragma mark - viewsCache
@@ -56,15 +55,15 @@
 
 #pragma mark - default add View 
 - (void)createView {
-    _showIndex = MIN(viewsArray.count-1, MAX(0, _showIndex));
+    _showIndex = MIN(_viewsArray.count-1, MAX(0, _showIndex));
     [self setContentOffset:CGPointMake(_showIndex * self.frame.size.width, 0)];
     
     if (_loadAll) {
         NSInteger startIndex;
-        if (viewsArray.count-_showIndex > _countLimit) {
+        if (_viewsArray.count-_showIndex > _countLimit) {
             startIndex = _showIndex;
         } else {
-            startIndex = viewsArray.count - _countLimit;
+            startIndex = _viewsArray.count - _countLimit;
         }
         for (NSInteger i = startIndex; i < startIndex + _countLimit; i ++) {
             [self addViewCacheIndex:i];
@@ -75,23 +74,23 @@
 }
 
 //- (void)addVcOrViews:(NSArray *)sources {
-//    NSInteger startIndex = viewsArray.count;
+//    NSInteger startIndex = _viewsArray.count;
 //    
-//    [viewsArray addObjectsFromArray:sources];
+//    [_viewsArray addObjectsFromArray:sources];
 //
 //    if (_loadAll) {
-//        _viewsCache.countLimit = viewsArray.count;
-//        for (NSInteger i = startIndex; i < viewsArray.count; i ++) {
+//        _viewsCache.countLimit = _viewsArray.count;
+//        for (NSInteger i = startIndex; i < _viewsArray.count; i ++) {
 //            [self addViewCacheIndex:i];
 //        }
 //    }
-//    [self setContentSize:CGSizeMake(viewsArray.count *self.width, self.height)];
+//    [self setContentSize:CGSizeMake(_viewsArray.count *self.width, self.height)];
 //}
 
 
 #pragma mark - addView
 - (void)addViewCacheIndex:(NSInteger)index {
-    id object = viewsArray[index];
+    id object = _viewsArray[index];
     if ([object isKindOfClass:[NSString class]]) {
         Class class = NSClassFromString(object);
         if ([class isSubclassOfClass:[UIViewController class]]) {//vc
@@ -168,8 +167,8 @@
     if (_addTiming == SegmentAddScale) {
         NSInteger currentIndex = self.contentOffset.x/self.frame.size.width;
         BOOL left = start_offset_x>=self.contentOffset.x;
-        NSInteger next_index = MAX(MIN(viewsArray.count-1, left?currentIndex:currentIndex+1), 0);
-        if (fabs(scale*viewsArray.count-next_index)<(1-_addScale)) {
+        NSInteger next_index = MAX(MIN(_viewsArray.count-1, left?currentIndex:currentIndex+1), 0);
+        if (fabs(scale*_viewsArray.count-next_index)<(1-_addScale)) {
             if (![_viewsCache objectForKey:@(next_index)]) {
                 [self addViewCacheIndex:next_index];
             }
@@ -208,16 +207,17 @@
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
         return;
     }
-    NSLog(@"remove - %@",NSStringFromClass([obj class]));
-    if ([obj isKindOfClass:[UIViewController class]]) {
-        UIViewController *vc = obj;
-        [vc.view removeFromSuperview];
-        vc.view = nil;
-        [vc removeFromParentViewController];
-    } else {
-        UIView *vw = obj;
-        [vw removeFromSuperview];
-        vw = nil;
+    if (self.subviews.count > self.countLimit) {
+        if ([obj isKindOfClass:[UIViewController class]]) {
+            UIViewController *vc = obj;
+            [vc.view removeFromSuperview];
+            vc.view = nil;
+            [vc removeFromParentViewController];
+        } else {
+            UIView *vw = obj;
+            [vw removeFromSuperview];
+            vw = nil;
+        }
     }
 }
 
