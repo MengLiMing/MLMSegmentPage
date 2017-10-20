@@ -218,7 +218,8 @@ static CGFloat animation_time = .3;
     [self addSubview:titlesScroll];
     
     
-    if (_moreButton) {
+    if (_moreButton_width != 0) {
+        _moreButton = [[UIView alloc] init];
         _moreButton.frame = CGRectMake(CGRectGetMaxX(titlesScroll.frame), 0, _moreButton_width, titlesScroll.height);
         [self addSubview:_moreButton];
     }
