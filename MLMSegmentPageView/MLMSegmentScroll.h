@@ -47,7 +47,15 @@ typedef enum : NSUInteger {
 ///SegmentAddScale 时使用
 @property (nonatomic, assign) CGFloat addScale;
 
+
+///给一些vc设置属性，在创建的时候,在viewController或view传入的是类名的时候使用
+@property (nonatomic, copy) void(^initSource)(id vcOrview, NSInteger index);
+
+
 - (instancetype)initWithFrame:(CGRect)frame vcOrViews:(NSArray *)sources;
+
+- (void)changeSource:(NSArray *)sources;
+
 
 /**
  * 创建之后，初始化

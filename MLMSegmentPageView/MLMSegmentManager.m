@@ -48,7 +48,7 @@
     scroll.scrollEnd = ^(NSInteger index) {
         [weakHead setSelectIndex:index];
         [weakHead animationEnd];
-        if (selectEnd && ani) {
+        if (selectEnd) {
             selectEnd(index);
         }
     };

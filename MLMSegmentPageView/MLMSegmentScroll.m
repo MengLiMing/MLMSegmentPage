@@ -31,11 +31,12 @@
 
 #pragma mark - default setting
 - (void)defaultSet {
+    WEAK_SELF
     self.showsVerticalScrollIndicator = NO;
     self.showsHorizontalScrollIndicator = NO;
     self.pagingEnabled = YES;
     self.bounces = NO;
-    self.delegate = self;
+    self.delegate = weakSelf;
     [self setContentSize:CGSizeMake(_viewsArray.count *self.width, self.height)];
     
     _countLimit = _viewsArray.count;
@@ -44,9 +45,10 @@
 #pragma mark - viewsCache
 - (NSCache *)viewsCache {
     if (!_viewsCache) {
+        WEAK_SELF
         _viewsCache = [[NSCache alloc] init];
         _viewsCache.countLimit = _countLimit;
-        _viewsCache.delegate = self;
+        _viewsCache.delegate = weakSelf;
         _viewsCache.evictsObjectsWithDiscardedContent = YES;
     }
     return _viewsCache;
@@ -73,6 +75,20 @@
     }
 }
 
+#pragma mark - changeSource
+- (void)changeSource:(NSArray *)sources {
+    _viewsArray = [sources mutableCopy];
+    _countLimit = MIN(_countLimit, _viewsArray.count);
+    
+    self.viewsCache.countLimit = _countLimit;
+    [self.viewsCache removeAllObjects];
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    [self createView];
+}
+
+
+
 //- (void)addVcOrViews:(NSArray *)sources {
 //    NSInteger startIndex = _viewsArray.count;
 //    
@@ -95,9 +111,15 @@
         Class class = NSClassFromString(object);
         if ([class isSubclassOfClass:[UIViewController class]]) {//vc
             UIViewController *vc = [class new];
+            if (self.initSource) {
+                self.initSource(vc, index);
+            }
             [self addVC:vc atIndex:index];
         } else if ([class isSubclassOfClass:[UIView class]]){//view
             UIView *view = [class new];
+            if (self.initSource) {
+                self.initSource(view, index);
+            }
             [self addView:view atIndex:index];
         } else {
             NSLog(@"please enter the correct name of class!");
@@ -184,6 +206,14 @@
     } else if (self.scrollEnd) {
         self.scrollEnd(currentIndex);
     }
+    
+    CGFloat scale = self.contentOffset.x/self.contentSize.width;
+    if ([self.segDelegate respondsToSelector:@selector(scrollOffsetScale:)]) {
+        [self.segDelegate scrollOffsetScale:scale];
+    } else if (self.offsetScale) {
+        self.offsetScale(scale);
+    }
+    
     if (_addTiming == SegmentAddNormal) {
         if (![_viewsCache objectForKey:@(currentIndex)]) {
             [self addViewCacheIndex:currentIndex];
@@ -219,6 +249,16 @@
             vw = nil;
         }
     }
+}
+
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if (self.contentOffset.x <= 0) {
+        if ([otherGestureRecognizer.delegate isKindOfClass:NSClassFromString(@"_FDFullscreenPopGestureRecognizerDelegate")]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 #pragma mark - dealloc

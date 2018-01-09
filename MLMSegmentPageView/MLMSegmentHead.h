@@ -102,7 +102,12 @@ typedef enum : NSUInteger {
  *  选中状态的缩放比例，SegmentHeadStyleSlide风格下此属性无用,设置缩放比例滑动过程中会有相应动画
  */
 @property (nonatomic, assign) CGFloat fontScale;
-
+/**
+ * 是否有背景图片
+ */
+@property (nonatomic, assign) BOOL hadBackImg;
+///背景图
+@property (nonatomic, strong) NSArray *backImages;
 
 /*------------添加更多按钮样式------------*/
 /**
@@ -113,7 +118,6 @@ typedef enum : NSUInteger {
  * 更多按钮宽度
  */
 @property (nonatomic, assign) CGFloat moreButton_width;
-
 
 /*------------下划线风格------------*/
 /**
@@ -266,6 +270,24 @@ typedef enum : NSUInteger {
 
 
 
+/**
+ 更改titles
 
+ @param titles title的数组
+ */
+- (void)changeTitle:(NSArray *)titles;
+
+
+/**
+ 下划线的view，用于自定义，如添加图片
+
+ @return 下划线的view
+ */
+- (UIView *)getLineView;
+
+
+- (UIScrollView *)titlesScroll;
+- (NSArray *)buttons;
+- (void)changeIndex:(NSInteger)index completion:(BOOL)completion;
 
 @end

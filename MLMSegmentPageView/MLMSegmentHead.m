@@ -41,6 +41,7 @@ static CGFloat animation_time = .3;
     UIScrollView *titlesScroll;
 
     NSMutableArray *buttonArray;//按钮数组
+    NSMutableArray *backImgArray;//背景图数组
 
     
     UIView *lineView;//下划线view
@@ -65,7 +66,6 @@ static CGFloat animation_time = .3;
     //用来判断向左向右
     CGFloat endScale;
 }
-
 
 #pragma mark - initMethod
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles {
@@ -95,6 +95,7 @@ static CGFloat animation_time = .3;
     _moreButton_width = 0;
     
     buttonArray = [NSMutableArray array];
+    backImgArray = [NSMutableArray array];
     _showIndex = 0;
     
     _fontSize = 13;
@@ -120,6 +121,13 @@ static CGFloat animation_time = .3;
     _bottomLineHeight = 1;
 
 }
+
+- (void)changeTitle:(NSArray *)titles {
+    titlesArray = [titles mutableCopy];
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self defaultAndCreateView];
+}
+
 
 #pragma mark - layout
 - (void)defaultAndCreateView {
@@ -157,9 +165,9 @@ static CGFloat animation_time = .3;
     if (_showIndex != 0) {
         currentIndex = _showIndex;
         [self changeContentOffset];
-        [self changeBtnFrom:0 to:_showIndex];
+        [self changeBtnFrom:0 to:currentIndex];
     }
-    
+
 }
 
 
@@ -262,6 +270,8 @@ static CGFloat animation_time = .3;
     
 }
 
+
+
 #pragma mark - drow arrow
 - (void)drawArrowLayer {
     arrow_layer = [[CAShapeLayer alloc] init];
@@ -332,12 +342,33 @@ static CGFloat animation_time = .3;
             [button setTintColor:_deSelectColor];
             [button addTarget:self action:@selector(selectedHeadTitles:) forControlEvents:UIControlEventTouchUpInside];
             [buttonArray addObject:button];
+            
+            //
+            UIImageView *imgV = [[UIImageView alloc] initWithFrame:button.frame];
+            [scroll addSubview:imgV];
+            [backImgArray addObject:imgV];
+            
         } else {
             [button setTintColor:_selectColor];
         }
         [scroll addSubview:button];
     }
     scroll.contentSize = CGSizeMake(MAX(SCROLL_WIDTH, sum_width), SCROLL_HEIGHT);
+}
+
+
+- (void)setBackImages:(NSArray *)backImages {
+    _backImages = backImages;
+    NSInteger count = MIN(backImages.count, backImgArray.count);
+    for (NSInteger i = 0; i < count; i ++) {
+        UIImageView *imageV = backImgArray[i];
+        [imageV setImage:backImages[i]];
+        if (i == currentIndex) {
+            imageV.alpha = 1;
+        } else {
+            imageV.alpha = 0;
+        }
+    }
 }
 
 
@@ -385,7 +416,8 @@ static CGFloat animation_time = .3;
 #pragma mark - button Action
 - (void)selectedHeadTitles:(UIButton *)button {
     NSInteger selectIndex = [buttonArray indexOfObject:button];
-    [self setSelectIndex:selectIndex];
+    [self changeIndex:selectIndex completion:YES];
+
 }
 
 #pragma mark - 点击结束
@@ -395,6 +427,29 @@ static CGFloat animation_time = .3;
 
 #pragma mark - set index
 - (void)setSelectIndex:(NSInteger)index {
+//    if (index == currentIndex) {
+//        return;
+//    }
+//    //before
+//    NSInteger before = currentIndex;
+//    currentIndex = index;
+//    [self changeContentOffset];
+//    //select
+//    [UIView animateWithDuration:animation_time animations:^{
+//        [self changeBtnFrom:before to:currentIndex];
+//    } completion:^(BOOL finished) {
+//    }];
+//    isSelected = YES;
+//    if ([self.delegate respondsToSelector:@selector(didSelectedIndex:)]) {
+//        [self.delegate didSelectedIndex:currentIndex];
+//    } else if (self.selectedIndex) {
+//        self.selectedIndex(currentIndex);
+//    }
+    
+    [self changeIndex:index completion:NO];
+}
+
+- (void)changeIndex:(NSInteger)index completion:(BOOL)completion {
     if (index == currentIndex) {
         return;
     }
@@ -408,12 +463,17 @@ static CGFloat animation_time = .3;
     } completion:^(BOOL finished) {
     }];
     isSelected = YES;
-    if ([self.delegate respondsToSelector:@selector(didSelectedIndex:)]) {
-        [self.delegate didSelectedIndex:currentIndex];
-    } else if (self.selectedIndex) {
-        self.selectedIndex(currentIndex);
+    
+    if (completion) {
+        if ([self.delegate respondsToSelector:@selector(didSelectedIndex:)]) {
+            [self.delegate didSelectedIndex:currentIndex];
+        } else if (self.selectedIndex) {
+            self.selectedIndex(currentIndex);
+        }
     }
+
 }
+
 
 - (void)changeContentOffset {
     if (sum_width > SCROLL_WIDTH) {
@@ -458,8 +518,15 @@ static CGFloat animation_time = .3;
         CGRect convertRect = [slideView convertRect:titlesScroll.frame fromView:titlesScroll];
         slideScroll.frame = CGRectMake(convertRect.origin.x, convertRect.origin.y, slideScroll.contentSize.width, slideScroll.contentSize.height);
     }
+    
+    if (_hadBackImg) {
+        UIImageView *before_img = backImgArray[from];
+        UIImageView *select_img = backImgArray[to];
+        
+        before_img.alpha = 0;
+        select_img.alpha = 1;
+    }
 }
-
 
 #pragma mark - animation
 //外部关联的scrollView变化
@@ -500,6 +567,7 @@ static CGFloat animation_time = .3;
     CGFloat titleScale = single_offset_scale * current_title_Scale + start_scale;
     //变化的百分比
     CGFloat change_scale = (left?-1:1)*(titleScale - start_scale)/current_title_Scale;
+    
 
     switch (_headStyle) {
         case SegmentHeadStyleDefault:
@@ -519,6 +587,12 @@ static CGFloat animation_time = .3;
             [self colorChangeCurBtn:currentBtn nextBtn:nextBtn changeScale:change_scale];
             //字体大小变化
             [self fontChangeCurBtn:currentBtn nextBtn:nextBtn changeScale:change_scale];
+            //背景图片
+            if (_hadBackImg) {
+                UIImageView *current_img = backImgArray[changeIndex];
+                UIImageView *next_img = backImgArray[nextIndex];
+                [self backImgCurImg:current_img nextImg:next_img changeScale:change_scale];
+            }
         }
             break;
         case SegmentHeadStyleSlide:
@@ -591,11 +665,24 @@ static CGFloat animation_time = .3;
                                                green:de_sel_green + green_changge*changeScale
                                                 blue:de_sel_blue + blue_changge*changeScale
                                                alpha:de_sel_alpha + alpha_changge*changeScale]];
+
         [curBtn setTintColor:[UIColor colorWithRed:sel_red - red_changge*changeScale
-                                                  green:sel_green - green_changge*changeScale
-                                                   blue:sel_blue - blue_changge*changeScale
-                                                  alpha:sel_alpha - alpha_changge*changeScale]];
+                                              green:sel_green - green_changge*changeScale
+                                               blue:sel_blue - blue_changge*changeScale
+                                              alpha:sel_alpha - alpha_changge*changeScale]];
     }
+}
+
+#pragma mark - 背景图渐变
+- (void)backImgCurImg:(UIImageView *)curback nextImg:(UIImageView *)nextback changeScale:(CGFloat)changeScale {
+
+    //alpha变化
+    CGFloat next_alpha = changeScale;
+    CGFloat cur_alpha = 1 - changeScale;
+    
+    nextback.alpha = next_alpha>.8?1.:next_alpha;
+    curback.alpha = cur_alpha<.2?0:cur_alpha;
+
 }
 
 
@@ -605,6 +692,10 @@ static CGFloat animation_time = .3;
 }
 
 #pragma mark - lineView
+- (UIView *)getLineView {
+    return lineView;
+}
+
 - (UIView *)getBottomLineView {
     return bottomLineView;
 }
@@ -615,10 +706,21 @@ static CGFloat animation_time = .3;
         return nil;
     }
 }
+
+
 #pragma mark - dealloc
 - (void)dealloc {
     arrow_layer.delegate = nil;
     [arrow_layer removeFromSuperlayer];
     arrow_layer = nil;
 }
+
+- (UIScrollView *)titlesScroll {
+    return titlesScroll;
+}
+
+- (NSArray *)buttons {
+    return buttonArray;
+}
+
 @end
