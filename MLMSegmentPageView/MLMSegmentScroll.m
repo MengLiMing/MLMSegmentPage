@@ -31,7 +31,7 @@
 
 #pragma mark - default setting
 - (void)defaultSet {
-    WEAK_SELF
+    WEAK(weakSelf, self)
     self.showsVerticalScrollIndicator = NO;
     self.showsHorizontalScrollIndicator = NO;
     self.pagingEnabled = YES;
@@ -45,7 +45,7 @@
 #pragma mark - viewsCache
 - (NSCache *)viewsCache {
     if (!_viewsCache) {
-        WEAK_SELF
+        WEAK(weakSelf, self)
         _viewsCache = [[NSCache alloc] init];
         _viewsCache.countLimit = _countLimit;
         _viewsCache.delegate = weakSelf;
