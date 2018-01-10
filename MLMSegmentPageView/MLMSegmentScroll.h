@@ -62,4 +62,7 @@ typedef enum : NSUInteger {
  */
 - (void)createView;
 
+- (NSInteger)currentIndex;
+- (id)currentVcOrView;
+
 @end

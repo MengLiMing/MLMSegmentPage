@@ -261,6 +261,14 @@
     return NO;
 }
 
+- (NSInteger)currentIndex {
+    return self.contentOffset.x/self.frame.size.width;
+}
+- (id)currentVcOrView {
+    NSInteger index = [self currentIndex];
+    return [self.viewsCache objectForKey:@(index)];
+}
+
 #pragma mark - dealloc
 - (void)dealloc {
     self.delegate = nil;
