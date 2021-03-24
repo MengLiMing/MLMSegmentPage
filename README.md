@@ -1,4 +1,7 @@
 # MLMSegmentPage
+
+## OC版本年久失修，Swift请选择EasyKits下的EasySegmentedView和EasyPagingContainerView
+
 manage your controllers or views
 
 * 快速集成顶部菜单栏
